@@ -1,11 +1,8 @@
 [
- {"name": "officebusters_search_sylphy", "url": "https://www.officebusters.com/kensaku/index_k.php?k=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC"},
- {"name": "officebusters_search_act", "url": "https://www.officebusters.com/kensaku/index_k.php?k=%E3%82%A2%E3%82%AF%E3%83%88%E3%83%81%E3%82%A7%E3%82%A2"},
- {"name": "officebusters_robots", "url": "https://www.officebusters.com/robots.txt"},
- {"name": "bicreyouth_search_sylphy", "url": "https://bic-reyouth.shop/view/search?keyword=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC"},
- {"name": "bicreyouth_robots", "url": "https://bic-reyouth.shop/robots.txt"},
- {"name": "happy119_top", "url": "https://www.119happy.com/ws/main"},
- {"name": "happy119_robots", "url": "https://www.119happy.com/robots.txt"},
- {"name": "officehappy_top", "url": "https://office-happy.com/"},
- {"name": "mercari_search_act", "url": "https://jp.mercari.com/search?keyword=%E3%82%A4%E3%83%88%E3%83%BC%E3%82%AD%20%E3%82%A2%E3%82%AF%E3%83%88&status=on_sale&price_max=30000&sort=created_time&order=desc", "browser": true, "capture": ["entities:search"]}
+ {"name": "officebusters_series_okamura", "url": "https://www.officebusters.com/series/okamura/"},
+ {"name": "officebusters_series_itoki", "url": "https://www.officebusters.com/series/itoki/"},
+ {"name": "officebusters_chair_arm", "url": "https://www.officebusters.com/chair/arm/"},
+ {"name": "bicreyouth_search_sylphy", "url": "https://bic-reyouth.shop/view/search?keyword=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC", "browser": true, "capture": ["*json"]},
+ {"name": "happy119_search_sylphy", "url": "https://www.119happy.com/ws/advancedsearch?srchWordTxt=%83V%83%8B%83t%83B%81%5B&cmdtyFlagTxt=sr&dispModeTxt=2&actionNameTxt=list&pass=advancedsearch"},
+ {"name": "happy119_search_act", "url": "https://www.119happy.com/ws/advancedsearch?srchWordTxt=%83C%83g%81%5B%83L%20%83A%83N%83g&cmdtyFlagTxt=sr&dispModeTxt=2&actionNameTxt=list&pass=advancedsearch"}
 ]

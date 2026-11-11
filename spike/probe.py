@@ -74,7 +74,9 @@ def main() -> None:
             captured = []
 
             def on_response(resp, captured=captured):
-                if any(k in resp.url for k in t.get("capture", [])):
+                keys = t.get("capture", [])
+                is_json = "json" in (resp.headers.get("content-type") or "")
+                if any(k in resp.url for k in keys) or ("*json" in keys and is_json):
                     try:
                         captured.append({"url": resp.url, "status": resp.status, "body": resp.json()})
                     except Exception as e:  # noqa: BLE001
