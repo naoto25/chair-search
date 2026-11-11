@@ -1,9 +1,11 @@
 [
- {"name": "officebusters_top", "url": "https://www.officebusters.com/"},
- {"name": "officebusters_item", "url": "https://www.officebusters.com/items/574120"},
- {"name": "bicreyouth_shop_top", "url": "https://bic-reyouth.shop/"},
- {"name": "bicreyouth_com_top", "url": "https://bic-reyouth.com/"},
- {"name": "ddg_rescue119", "url": "https://html.duckduckgo.com/html/?q=%E3%82%AA%E3%83%95%E3%82%A3%E3%82%B9%E3%83%AC%E3%82%B9%E3%82%AD%E3%83%A5%E3%83%BC119"},
- {"name": "mercari_robots", "url": "https://jp.mercari.com/robots.txt"},
- {"name": "mercari_search", "url": "https://jp.mercari.com/search?keyword=%E3%82%AA%E3%82%AB%E3%83%A0%E3%83%A9%20%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC&status=on_sale", "browser": true, "capture": ["entities:search"]}
+ {"name": "officebusters_search_sylphy", "url": "https://www.officebusters.com/kensaku/index_k.php?k=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC"},
+ {"name": "officebusters_search_act", "url": "https://www.officebusters.com/kensaku/index_k.php?k=%E3%82%A2%E3%82%AF%E3%83%88%E3%83%81%E3%82%A7%E3%82%A2"},
+ {"name": "officebusters_robots", "url": "https://www.officebusters.com/robots.txt"},
+ {"name": "bicreyouth_search_sylphy", "url": "https://bic-reyouth.shop/view/search?keyword=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC"},
+ {"name": "bicreyouth_robots", "url": "https://bic-reyouth.shop/robots.txt"},
+ {"name": "happy119_top", "url": "https://www.119happy.com/ws/main"},
+ {"name": "happy119_robots", "url": "https://www.119happy.com/robots.txt"},
+ {"name": "officehappy_top", "url": "https://office-happy.com/"},
+ {"name": "mercari_search_act", "url": "https://jp.mercari.com/search?keyword=%E3%82%A4%E3%83%88%E3%83%BC%E3%82%AD%20%E3%82%A2%E3%82%AF%E3%83%88&status=on_sale&price_max=30000&sort=created_time&order=desc", "browser": true, "capture": ["entities:search"]}
 ]
