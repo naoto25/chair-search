@@ -1,0 +1,36 @@
+# スパイク用（使い捨て）。各サイトを GitHub Actions から取得できるか確かめ、結果を spike-data ブランチに置く。
+name: spike
+
+on:
+  push:
+    branches: [claude/chair-price-monitor-9ron48]
+    paths: [spike/**, .github/workflows/spike.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install httpx playwright && playwright install --with-deps chromium
+      - run: python spike/probe.py spike/targets.json
+      - name: 結果を spike-data ブランチに push
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p /tmp/keep && cp -r out /tmp/keep/ || true
+          git checkout --orphan spike-data
+          git rm -rq --cached . || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -r /tmp/keep/out . || mkdir out
+          git add out
+          git commit -qm "spike: ${GITHUB_SHA::7} の取得結果" --allow-empty
+          git push -f origin spike-data
