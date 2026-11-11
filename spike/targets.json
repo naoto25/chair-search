@@ -1,8 +1,9 @@
 [
- {"name": "officebusters_series_okamura", "url": "https://www.officebusters.com/series/okamura/"},
- {"name": "officebusters_series_itoki", "url": "https://www.officebusters.com/series/itoki/"},
- {"name": "officebusters_chair_arm", "url": "https://www.officebusters.com/chair/arm/"},
- {"name": "bicreyouth_search_sylphy", "url": "https://bic-reyouth.shop/view/search?keyword=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3%E3%83%BC", "browser": true, "capture": ["*json"]},
- {"name": "happy119_search_sylphy", "url": "https://www.119happy.com/ws/advancedsearch?srchWordTxt=%83V%83%8B%83t%83B%81%5B&cmdtyFlagTxt=sr&dispModeTxt=2&actionNameTxt=list&pass=advancedsearch"},
- {"name": "happy119_search_act", "url": "https://www.119happy.com/ws/advancedsearch?srchWordTxt=%83C%83g%81%5B%83L%20%83A%83N%83g&cmdtyFlagTxt=sr&dispModeTxt=2&actionNameTxt=list&pass=advancedsearch"}
+ {"name": "officebusters_sylphy", "url": "https://www.officebusters.com/series/okamura/sylphy/"},
+ {"name": "officebusters_sylphymesh", "url": "https://www.officebusters.com/series/okamura/Sylphymesh/"},
+ {"name": "officebusters_act", "url": "https://www.officebusters.com/series/itoki/act-chair/"},
+ {"name": "bicreyouth_api_act", "url": "https://kanri.bic-reyouth.com/api/shop/product/search?keyword=%E3%82%A2%E3%82%AF%E3%83%88%E3%83%81%E3%82%A7%E3%82%A2&limit=50"},
+ {"name": "bicreyouth_api_sylphy", "url": "https://kanri.bic-reyouth.com/api/shop/product/search?keyword=%E3%82%B7%E3%83%AB%E3%83%95%E3%82%A3&limit=50"},
+ {"name": "happy119_detail", "url": "https://www.119happy.com/ws/search_cmdty/IO-886027B/IO-886027B"},
+ {"name": "happy119_detail2", "url": "https://www.119happy.com/ws/search_cmdty/IO-881612C/IO-881612C"}
 ]
