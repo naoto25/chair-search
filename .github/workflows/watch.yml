@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
+    inputs:
+      preview:
+        description: お試し送信（今の候補から 2 件を送るだけで、記録は変えない）
+        type: boolean
+        default: false
 
 # 前回の実行が終わる前に次が始まって state.json を取り合わないようにする
 concurrency:
@@ -30,6 +35,7 @@ jobs:
         env:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+          CHAIR_WATCH_PREVIEW: ${{ inputs.preview }}
         run: uv run python -m chair_watch.main
       - name: state.json と detail_cache.json に変更があればコミットする
         run: |
