@@ -7,6 +7,7 @@ from urllib.parse import quote, urljoin
 import httpx
 from selectolax.lexbor import LexborHTMLParser as HTMLParser
 
+from chair_watch.detail_cache import DetailCache
 from chair_watch.filters import PRICE_LIMIT_YEN, is_chair_model
 from chair_watch.models import Listing
 
@@ -58,7 +59,7 @@ def parse_arm_type(html: str) -> str | None:
     return None
 
 
-def fetch(client: httpx.Client) -> list[Listing]:
+def fetch(client: httpx.Client, cache: DetailCache) -> list[Listing]:
     results: dict[str, Listing] = {}
     for keyword in KEYWORDS:
         response = client.get(search_url(keyword))
@@ -67,9 +68,15 @@ def fetch(client: httpx.Client) -> list[Listing]:
             results[listing.item_id] = listing
 
     # 一覧の商品名には肘の有無が書かれていないので、通知対象になりうる出品だけ詳細ページで確かめる
+    cache.prune(SITE, keep=set(results))
     for item_id, listing in results.items():
         if listing.price_yen <= PRICE_LIMIT_YEN and is_chair_model(listing):
-            response = client.get(listing.url)
-            response.raise_for_status()
-            results[item_id] = replace(listing, description=parse_arm_type(response.text))
+            arm_type = cache.get_or_fetch(SITE, item_id, lambda url=listing.url: _get_arm_type(client, url))
+            results[item_id] = replace(listing, description=arm_type)
     return list(results.values())
+
+
+def _get_arm_type(client: httpx.Client, url: str) -> str | None:
+    response = client.get(url)
+    response.raise_for_status()
+    return parse_arm_type(response.text)

@@ -31,11 +31,11 @@ jobs:
           LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
         run: uv run python -m chair_watch.main
-      - name: state.json に変更があればコミットする
+      - name: state.json と detail_cache.json に変更があればコミットする
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add state.json
+          git add state.json detail_cache.json
           git diff --cached --quiet && exit 0
           git commit -m "state: 監視結果を更新する"
           git push
