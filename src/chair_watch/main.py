@@ -14,7 +14,7 @@ from pathlib import Path
 
 from chair_watch import notify_line
 from chair_watch.detail_cache import DetailCache
-from chair_watch.diff import SiteFetch, compute
+from chair_watch.diff import Notification, SiteFetch, compute
 from chair_watch.filters import is_target
 from chair_watch.models import Listing
 from chair_watch.sources import http_sources, mercari
@@ -64,13 +64,28 @@ def fetch_all(cache: DetailCache) -> dict[str, SiteFetch | None]:
 
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
+    preview = os.environ.get("CHAIR_WATCH_PREVIEW") == "true"
     state = load_state(STATE_PATH)
     cache = DetailCache.load(DETAIL_CACHE_PATH)
-    result = compute(state, fetch_all(cache))
+    fetches = fetch_all(cache)
     # 詳細ページの内容は通知の成否に関係なく保存してよい（読み直しを減らすため）
     cache.save(DETAIL_CACHE_PATH)
 
-    messages = notify_line.build_messages(result.notifications)
+    if preview:
+        # お試し送信: 記録が空だったとして通知を作り、その中から 2 件だけ送る。state は変えない
+        result = compute({"sites": {}}, fetches)
+        result.notifications[:] = preview_notifications(result.notifications)
+        result.failure_alerts.clear()
+    else:
+        result = compute(state, fetches)
+
+    image_url = None
+    if result.notifications:
+        # 1 件目の写真を画像メッセージとして付ける（JPEG/PNG で取れたときだけ）
+        with http_sources.client() as client:
+            image_url = notify_line.find_jpeg_image(client, result.notifications[0].listing)
+        log.info("1 件目の画像: %s", image_url or "なし")
+    messages = notify_line.build_messages(result.notifications, image_url=image_url)
     if result.failure_alerts:
         messages.append(notify_line.build_failure_message(result.failure_alerts))
 
@@ -88,8 +103,16 @@ def main() -> int:
             # GitHub Actions では Secrets の登録漏れに気づけるよう失敗させる
             return 1 if os.environ.get("GITHUB_ACTIONS") else 0
 
-    save_state(STATE_PATH, result.state)
+    if not preview:
+        save_state(STATE_PATH, result.state)
     return 0
+
+
+def preview_notifications(notifications: list[Notification]) -> list[Notification]:
+    """お試し送信用に、メルカリ（画像が WebP なので画像まわりの確認になる）とほかのサイトから 1 件ずつ選ぶ。"""
+    mercari_first = [n for n in notifications if n.listing.site == mercari.SITE][:1]
+    others = [n for n in notifications if n.listing.site != mercari.SITE][:1]
+    return mercari_first + others
 
 
 if __name__ == "__main__":
