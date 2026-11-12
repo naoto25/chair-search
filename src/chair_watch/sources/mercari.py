@@ -45,6 +45,7 @@ def parse_search_response(body: dict) -> list[Listing]:
                 url=url,
                 image_url=thumbnails[0] if thumbnails else None,
                 description=brand,
+                allow_arm_unknown=True,
             )
         )
     return listings

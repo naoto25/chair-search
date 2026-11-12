@@ -1,6 +1,7 @@
 """取得 → 判定 → 差分 → 通知 → 記録の保存 を 1 回分実行する。
 
-環境変数 LINE_CHANNEL_ACCESS_TOKEN と LINE_USER_ID がなければ、送らずに内容を表示するだけにする。
+環境変数 LINE_CHANNEL_ACCESS_TOKEN と LINE_USER_ID がなければ、送らずに内容を表示するだけにして、
+state.json も更新しない（GitHub Actions 上では失敗として終わる）。
 """
 
 import json
@@ -76,8 +77,11 @@ def main() -> int:
             notify_line.push(token, user_id, messages)
             log.info("LINE に %d 通送りました", len(messages))
         else:
-            log.info("LINE の設定がないので送らずに表示します")
+            # 送れなかった通知を「送ったこと」にしないよう、state は保存しない
+            log.info("LINE の設定がないので送らずに表示します（state.json は更新しません）")
             print(json.dumps(messages, ensure_ascii=False, indent=1))
+            # GitHub Actions では Secrets の登録漏れに気づけるよう失敗させる
+            return 1 if os.environ.get("GITHUB_ACTIONS") else 0
 
     save_state(STATE_PATH, result.state)
     return 0

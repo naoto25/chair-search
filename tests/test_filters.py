@@ -1,10 +1,12 @@
 import pytest
 
-from chair_watch.filters import is_target
+from chair_watch.filters import arm_status, is_target
 from chair_watch.models import Listing
 
 
-def listing(title: str, description: str | None = None, chair_category: bool = False) -> Listing:
+def listing(
+    title: str, description: str | None = None, chair_category: bool = False, allow_arm_unknown: bool = False
+) -> Listing:
     return Listing(
         site="test",
         item_id="1",
@@ -14,7 +16,24 @@ def listing(title: str, description: str | None = None, chair_category: bool = F
         image_url=None,
         description=description,
         from_chair_category=chair_category,
+        allow_arm_unknown=allow_arm_unknown,
     )
+
+
+def test_肘の状態():
+    assert arm_status(listing("オカムラ シルフィー 可動肘")) == "yes"
+    assert arm_status(listing("オカムラ シルフィー 肘なし")) == "no"
+    assert arm_status(listing("オカムラ シルフィー 固定肘")) == "no"
+    assert arm_status(listing("オカムラ シルフィー ハイバック")) == "unknown"
+
+
+def test_肘の記載なしを許すサイトでは記載なしも対象():
+    assert is_target(listing("オカムラ シルフィー オフィスチェア", allow_arm_unknown=True))
+
+
+def test_肘の記載なしを許すサイトでも肘なしと部品は除外():
+    assert not is_target(listing("オカムラ シルフィー 肘無し", allow_arm_unknown=True))
+    assert not is_target(listing("オカムラ シルフィー用 ヘッドレスト", allow_arm_unknown=True))
 
 
 @pytest.mark.parametrize(

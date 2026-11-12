@@ -1,9 +1,7 @@
 """前回の記録（state）と今回の取得結果を比べて、通知する出品を決める。通信はしない。
 
 state の形:
-    {"sites": {"<site>": {"items": {"<item_id>": <価格>}, "failures": <連続失敗回数>,
-                          "initialized": false  # 一度も取得に成功していないときだけ入る
-    }}}
+    {"sites": {"<site>": {"items": {"<item_id>": <価格>}, "failures": <連続失敗回数>}}}
 """
 
 import copy
@@ -53,19 +51,18 @@ def compute(state: dict, fetches: dict[str, SiteFetch | None]) -> DiffResult:
 
         failed = fetch is None or (fetch.raw_count == 0 and len(prev_items) > 0)
         if failed:
-            entry = prev if prev else {"items": {}, "failures": 0, "initialized": False}
+            entry = prev if prev else {"items": {}, "failures": 0}
             entry["failures"] += 1
             if entry["failures"] == FAILURE_ALERT_THRESHOLD:
                 result.failure_alerts.append(site)
             sites[site] = entry
             continue
 
-        first_run = prev is None or prev.get("initialized") is False
-        if not first_run:
-            for listing in fetch.listings:
-                n = _notification(listing, prev_items.get(listing.item_id))
-                if n:
-                    result.notifications.append(n)
+        # 初回（記録が空）は、今ある 3 万円以下の出品がすべて新着として通知される
+        for listing in fetch.listings:
+            n = _notification(listing, prev_items.get(listing.item_id))
+            if n:
+                result.notifications.append(n)
 
         sites[site] = {
             "items": {listing.item_id: listing.price_yen for listing in fetch.listings},

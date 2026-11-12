@@ -61,6 +61,15 @@ def test_新着のカード():
     assert "¥24,800" in text and "新着" in text and "→" not in text
 
 
+def test_肘の記載がない出品にはそのことを書く():
+    n = notification(1)
+    unknown = Notification("new", Listing("mercari", "9", "オカムラ シルフィー オフィスチェア", 20000, "https://x", None))
+    [message] = build_messages([n, unknown])
+    known_text, unknown_text = (all_text(b) for b in bubbles(message))
+    assert "肘：記載なし" not in known_text
+    assert "肘：記載なし（写真で確認）" in unknown_text
+
+
 def test_画像がなければheroを付けない():
     [message] = build_messages([notification(1, image=None)])
     assert "hero" not in bubbles(message)[0]

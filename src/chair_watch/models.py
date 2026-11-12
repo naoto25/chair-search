@@ -16,3 +16,5 @@ class Listing:
     description: str | None = None
     # チェアのカテゴリで絞り込んだ検索から取得したか
     from_chair_category: bool = False
+    # 肘について何も書かれていなくても通知してよいか（タイトルに肘の記載が少ないメルカリで使う）
+    allow_arm_unknown: bool = False

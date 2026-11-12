@@ -18,6 +18,8 @@ def test_検索結果のJSONから出品を読む():
     assert item.image_url == "https://static.mercdn.net/thumb/item/webp/m26476732034_1.jpg?1793834806"
     # ブランド名を説明文として持つ（タイトルにメーカー名がない出品を拾うため）
     assert item.description == "OKAMURA"
+    # タイトルに肘の記載がない出品が多いので、記載なしも通知対象にする
+    assert item.allow_arm_unknown is True
 
 
 def test_メルカリShopsの出品はshopsのURLにする():

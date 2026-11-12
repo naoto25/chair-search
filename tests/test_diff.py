@@ -21,10 +21,10 @@ def state_with(items: dict[str, int], failures: int = 0, site: str = "a") -> dic
     return {"sites": {site: {"items": items, "failures": failures}}}
 
 
-def test_初回はそのサイトを記録するだけで通知しない():
-    result = compute({"sites": {}}, {"a": fetched(item("1", 20000))})
-    assert result.notifications == []
-    assert result.state["sites"]["a"]["items"] == {"1": 20000}
+def test_初回は3万円以下の出品をすべて新着として通知する():
+    result = compute({"sites": {}}, {"a": fetched(item("1", 20000), item("2", 40000))})
+    assert [(n.kind, n.listing.item_id) for n in result.notifications] == [("new", "1")]
+    assert result.state["sites"]["a"]["items"] == {"1": 20000, "2": 40000}
 
 
 def test_新着で3万円以下なら通知():
@@ -99,13 +99,12 @@ def test_成功したら失敗回数を0に戻す():
     assert result.state["sites"]["a"]["failures"] == 0
 
 
-def test_初回から失敗したサイトは成功した回を初回として扱う():
+def test_初回から失敗したサイトは記録を空のまま残し失敗回数を数える():
     failed = compute({"sites": {}}, {"a": None})
-    assert failed.state["sites"]["a"]["initialized"] is False
+    assert failed.state["sites"]["a"] == {"items": {}, "failures": 1}
 
     first_success = compute(failed.state, {"a": fetched(item("1", 20000))})
-    assert first_success.notifications == []
-    assert first_success.state["sites"]["a"]["items"] == {"1": 20000}
+    assert [n.kind for n in first_success.notifications] == ["new"]
 
 
 def test_今回取得しなかったサイトの記録はそのまま残す():

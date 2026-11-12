@@ -3,6 +3,7 @@
 import httpx
 
 from chair_watch.diff import Notification
+from chair_watch.filters import arm_status
 
 PUSH_URL = "https://api.line.me/v2/bot/message/push"
 # Flex Message のカルーセルに入れられるカードの上限
@@ -79,6 +80,10 @@ def _bubble(n: Notification) -> dict:
             ],
         },
     }
+    if arm_status(listing) == "unknown":
+        bubble["body"]["contents"].append(
+            {"type": "text", "text": "肘：記載なし（写真で確認）", "size": "xs", "color": "#B06000", "wrap": True}
+        )
     if listing.image_url:
         bubble["hero"] = {
             "type": "image",

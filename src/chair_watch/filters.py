@@ -2,6 +2,7 @@
 
 import re
 import unicodedata
+from typing import Literal
 
 from chair_watch.models import Listing
 
@@ -40,11 +41,22 @@ def is_chair_model(listing: Listing) -> bool:
     return (is_sylphy or is_act) and not _PARTS_ONLY.search(normalize(listing.title))
 
 
-def is_target(listing: Listing) -> bool:
-    """シルフィー / アクトで、肘があり、肘なし・固定肘と書かれていない出品か。"""
-    if not is_chair_model(listing):
-        return False
+def arm_status(listing: Listing) -> Literal["yes", "no", "unknown"]:
+    """肘付き（yes）、肘なし・固定肘（no）、記載なし（unknown）。"""
     text = _text(listing)
     if _NO_OR_FIXED_ARM.search(text):
+        return "no"
+    if _ARM.search(text):
+        return "yes"
+    return "unknown"
+
+
+def is_target(listing: Listing) -> bool:
+    """シルフィー / アクトで、肘があり、肘なし・固定肘と書かれていない出品か。
+
+    allow_arm_unknown の出品は、肘について何も書かれていなくても対象にする。
+    """
+    if not is_chair_model(listing):
         return False
-    return bool(_ARM.search(text))
+    status = arm_status(listing)
+    return status == "yes" or (status == "unknown" and listing.allow_arm_unknown)
