@@ -4,7 +4,6 @@ import httpx
 
 from chair_watch.diff import Notification
 from chair_watch.filters import arm_status
-from chair_watch.models import Listing
 
 PUSH_URL = "https://api.line.me/v2/bot/message/push"
 # Flex Message のカルーセルに入れられるカードの上限
@@ -24,19 +23,18 @@ def site_name(site: str) -> str:
     return SITE_NAMES.get(site, site)
 
 
-def build_messages(notifications: list[Notification], image_url: str | None = None) -> list[dict]:
+def build_messages(notifications: list[Notification]) -> list[dict]:
     """通知を Flex Message のカルーセルにまとめる。12 件ごとに 1 通。
 
-    image_url（1 件目の写真。JPEG か PNG）があれば、先頭に画像メッセージを付ける。
-    1 回の push にまとめたメッセージは何個でも 1 通と数えられるので、通数は増えない。
+    画像メッセージは付けない。付けるとプッシュ通知が「写真を送信しました」になるため。
     """
     if not notifications:
         return []
-    summary = _summary(notifications)
+    new = sum(1 for n in notifications if n.kind == "new")
+    drop = len(notifications) - new
+    summary = "・".join(s for s in (f"新着{new}件" if new else "", f"値下げ{drop}件" if drop else "") if s)
 
     messages: list[dict] = []
-    if image_url:
-        messages.append({"type": "image", "originalContentUrl": image_url, "previewImageUrl": image_url})
     for start in range(0, len(notifications), MAX_BUBBLES):
         chunk = notifications[start : start + MAX_BUBBLES]
         messages.append(
@@ -47,46 +45,6 @@ def build_messages(notifications: list[Notification], image_url: str | None = No
             }
         )
     return messages
-
-
-_TITLE_MAX = 40
-
-
-def _summary(notifications: list[Notification]) -> str:
-    """プッシュ通知に出る文。件数と、1 件目の価格・商品名・サイト名。"""
-    new = sum(1 for n in notifications if n.kind == "new")
-    drop = len(notifications) - new
-    counts = "・".join(s for s in (f"新着{new}件" if new else "", f"値下げ{drop}件" if drop else "") if s)
-    first = notifications[0].listing
-    title = first.title if len(first.title) <= _TITLE_MAX else first.title[:_TITLE_MAX] + "…"
-    rest = "ほか" if len(notifications) > 1 else ""
-    return f"{counts}｜¥{first.price_yen:,} {title}（{site_name(first.site)}）{rest}"
-
-
-def jpeg_url_candidates(listing: Listing) -> list[str]:
-    """LINE の画像メッセージに使えそうな（JPEG で返りそうな）画像 URL を、試す順に返す。"""
-    url = listing.image_url
-    if not url:
-        return []
-    candidates = []
-    if "static.mercdn.net/thumb/item/webp/" in url:
-        candidates.append(url.replace("/thumb/item/webp/", "/item/detail/orig/photos/"))
-    if url.endswith("@webp"):
-        candidates.append(url.removesuffix("@webp") + "@jpg")
-    return [*candidates, url]
-
-
-def find_jpeg_image(client: httpx.Client, listing: Listing) -> str | None:
-    """候補 URL を実際に取りに行き、JPEG か PNG で返ってきた最初の URL を返す。"""
-    for url in jpeg_url_candidates(listing):
-        try:
-            response = client.get(url)
-        except httpx.HTTPError:
-            continue
-        content_type = response.headers.get("content-type", "")
-        if response.status_code == 200 and content_type.split(";")[0] in ("image/jpeg", "image/png"):
-            return url
-    return None
 
 
 def _bubble(n: Notification) -> dict:

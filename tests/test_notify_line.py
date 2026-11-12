@@ -1,6 +1,6 @@
 from chair_watch.diff import Notification
 from chair_watch.models import Listing
-from chair_watch.notify_line import build_failure_message, build_messages, jpeg_url_candidates
+from chair_watch.notify_line import build_failure_message, build_messages
 
 
 def notification(i: int, kind: str = "new", old: int | None = None, image: str | None = "https://img/1.jpg") -> Notification:
@@ -34,7 +34,7 @@ def test_通知がなければメッセージもない():
 def test_カルーセル1通にまとめて要約をaltTextに入れる():
     [message] = build_messages([notification(1), notification(2), notification(3, "price_drop", 32000)])
     assert message["type"] == "flex"
-    assert message["altText"].startswith("新着2件・値下げ1件｜")
+    assert message["altText"] == "新着2件・値下げ1件"
     assert message["contents"]["type"] == "carousel"
     assert len(bubbles(message)) == 3
 
@@ -81,48 +81,7 @@ def test_失敗の知らせはテキスト():
     assert "メルカリ" in message["text"] and "オフィスバスターズ" in message["text"]
 
 
-def test_通知の文に1件目の商品名と価格とサイト名を入れる():
-    [message] = build_messages([notification(1), notification(2, "price_drop", 32000)])
-    assert message["altText"] == "新着1件・値下げ1件｜¥24,800 オカムラ シルフィー 可動肘 1（メルカリ）ほか"
-
-
-def test_1件だけならほかを付けない():
-    [message] = build_messages([notification(1)])
-    assert message["altText"] == "新着1件｜¥24,800 オカムラ シルフィー 可動肘 1（メルカリ）"
-
-
-def test_長い商品名は切り詰める():
-    long = Notification("new", Listing("mercari", "1", "あ" * 100, 20000, "https://x", None))
-    [message] = build_messages([long])
-    assert message["altText"] == "新着1件｜¥20,000 " + "あ" * 40 + "…（メルカリ）"
-
-
-def test_画像URLを渡すと先頭に画像メッセージを付ける():
-    messages = build_messages([notification(1)], image_url="https://img/1.jpg")
-    assert messages[0] == {
-        "type": "image",
-        "originalContentUrl": "https://img/1.jpg",
-        "previewImageUrl": "https://img/1.jpg",
-    }
-    assert messages[1]["type"] == "flex"
-
-
-def test_JPEGの画像URLの候補():
-    def listing(site: str, image: str) -> Listing:
-        return Listing(site, "1", "t", 1, "https://x", image)
-
-    # メルカリはサムネイルが WebP なので、元画像（JPEG）の URL を先に試す
-    assert jpeg_url_candidates(
-        listing("mercari", "https://static.mercdn.net/thumb/item/webp/m123_1.jpg?1794037805")
-    ) == [
-        "https://static.mercdn.net/item/detail/orig/photos/m123_1.jpg?1794037805",
-        "https://static.mercdn.net/thumb/item/webp/m123_1.jpg?1794037805",
-    ]
-    assert jpeg_url_candidates(
-        listing("mercari", "https://assets.mercari-shops-static.com/-/small/plain/abc.jpg@webp")
-    ) == [
-        "https://assets.mercari-shops-static.com/-/small/plain/abc.jpg@jpg",
-        "https://assets.mercari-shops-static.com/-/small/plain/abc.jpg@webp",
-    ]
-    assert jpeg_url_candidates(listing("officebusters", "https://image/1_m_1.jpg")) == ["https://image/1_m_1.jpg"]
-    assert jpeg_url_candidates(Listing("a", "1", "t", 1, "https://x", None)) == []
+def test_画像メッセージは付けない():
+    # 画像メッセージを付けると、プッシュ通知が「写真を送信しました」になってしまうため
+    messages = build_messages([notification(1)])
+    assert [m["type"] for m in messages] == ["flex"]

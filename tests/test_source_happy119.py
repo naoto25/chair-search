@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from chair_watch.sources.happy119 import parse_arm_type, parse_search_html, search_url
+from chair_watch.models import Listing
+from chair_watch.sources.happy119 import is_chair_page, parse_arm_type, parse_search_html, search_url
 
 FIXTURE = Path(__file__).parent / "fixtures" / "happy119_search.html"
 
@@ -36,3 +37,12 @@ def test_検索語はShift_JISでURLに入れる():
         "https://www.119happy.com/ws/advancedsearch?srchWordTxt=%83V%83%8B%83t%83B%81%5B"
         "&cmdtyFlagTxt=sr&dispModeTxt=2&actionNameTxt=list&pass=advancedsearch&pageSizeSel=80"
     )
+
+
+def test_詳細を読むのは椅子の商品ページだけ():
+    def listing(url: str) -> Listing:
+        return Listing("happy119", "1", "イトーキ 平デスク アクトリンク", 18700, url, None)
+
+    assert is_chair_page(listing("https://www.119happy.com/ws/chair_cmdty/IO-1/IO-1/IO"))
+    assert not is_chair_page(listing("https://www.119happy.com/ws/desk_cmdty/DH-1/DH-1/DH"))
+    assert not is_chair_page(listing("https://www.119happy.com/ws/table_cmdty/TM-1/TM-1/TM"))
