@@ -34,7 +34,7 @@ def test_通知がなければメッセージもない():
 def test_カルーセル1通にまとめて要約をaltTextに入れる():
     [message] = build_messages([notification(1), notification(2), notification(3, "price_drop", 32000)])
     assert message["type"] == "flex"
-    assert message["altText"] == "新着2件・値下げ1件"
+    assert message["altText"].startswith("新着2件・値下げ1件｜")
     assert message["contents"]["type"] == "carousel"
     assert len(bubbles(message)) == 3
 
@@ -85,3 +85,24 @@ def test_画像メッセージは付けない():
     # 画像メッセージを付けると、プッシュ通知が「写真を送信しました」になってしまうため
     messages = build_messages([notification(1)])
     assert [m["type"] for m in messages] == ["flex"]
+
+
+def test_通知の文に1件目の価格と商品名とサイト名を入れる():
+    [message] = build_messages([notification(1), notification(2), notification(3)])
+    assert message["altText"] == "新着3件｜¥24,800 オカムラ シルフィー 可動肘 1（メルカリ）ほか2件"
+
+
+def test_1件だけならほかを付けない():
+    [message] = build_messages([notification(1)])
+    assert message["altText"] == "新着1件｜¥24,800 オカムラ シルフィー 可動肘 1（メルカリ）"
+
+
+def test_先頭が値下げなら旧価格も入れる():
+    [message] = build_messages([notification(1, "price_drop", 32000)])
+    assert message["altText"] == "値下げ1件｜¥32,000→¥24,800 オカムラ シルフィー 可動肘 1（メルカリ）"
+
+
+def test_長い商品名は切り詰める():
+    long = Notification("new", Listing("mercari", "1", "あ" * 100, 20000, "https://x", None))
+    [message] = build_messages([long])
+    assert message["altText"] == "新着1件｜¥20,000 " + "あ" * 40 + "…（メルカリ）"
