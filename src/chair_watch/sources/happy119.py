@@ -70,10 +70,15 @@ def fetch(client: httpx.Client, cache: DetailCache) -> list[Listing]:
     # 一覧の商品名には肘の有無が書かれていないので、通知対象になりうる出品だけ詳細ページで確かめる
     cache.prune(SITE, keep=set(results))
     for item_id, listing in results.items():
-        if listing.price_yen <= PRICE_LIMIT_YEN and is_chair_model(listing):
+        if listing.price_yen <= PRICE_LIMIT_YEN and is_chair_page(listing) and is_chair_model(listing):
             arm_type = cache.get_or_fetch(SITE, item_id, lambda url=listing.url: _get_arm_type(client, url))
             results[item_id] = replace(listing, description=arm_type)
     return list(results.values())
+
+
+def is_chair_page(listing: Listing) -> bool:
+    """椅子の商品ページか。「アクトリンク」の机やテーブルなど、椅子以外の詳細ページは読まない。"""
+    return "/chair_cmdty/" in listing.url
 
 
 def _get_arm_type(client: httpx.Client, url: str) -> str | None:

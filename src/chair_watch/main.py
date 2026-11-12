@@ -79,13 +79,7 @@ def main() -> int:
     else:
         result = compute(state, fetches)
 
-    image_url = None
-    if result.notifications:
-        # 1 件目の写真を画像メッセージとして付ける（JPEG/PNG で取れたときだけ）
-        with http_sources.client() as client:
-            image_url = notify_line.find_jpeg_image(client, result.notifications[0].listing)
-        log.info("1 件目の画像: %s", image_url or "なし")
-    messages = notify_line.build_messages(result.notifications, image_url=image_url)
+    messages = notify_line.build_messages(result.notifications)
     if result.failure_alerts:
         messages.append(notify_line.build_failure_message(result.failure_alerts))
 
