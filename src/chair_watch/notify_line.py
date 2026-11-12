@@ -26,13 +26,12 @@ def site_name(site: str) -> str:
 def build_messages(notifications: list[Notification]) -> list[dict]:
     """通知を Flex Message のカルーセルにまとめる。12 件ごとに 1 通。
 
+    プッシュ通知に出る文（altText）には、件数と 1 件目の価格・商品名・サイト名を入れる。
     画像メッセージは付けない。付けるとプッシュ通知が「写真を送信しました」になるため。
     """
     if not notifications:
         return []
-    new = sum(1 for n in notifications if n.kind == "new")
-    drop = len(notifications) - new
-    summary = "・".join(s for s in (f"新着{new}件" if new else "", f"値下げ{drop}件" if drop else "") if s)
+    summary = _summary(notifications)
 
     messages: list[dict] = []
     for start in range(0, len(notifications), MAX_BUBBLES):
@@ -45,6 +44,27 @@ def build_messages(notifications: list[Notification]) -> list[dict]:
             }
         )
     return messages
+
+
+# 通知の文に入れる商品名の最大文字数（長すぎると通知で読みにくい）
+_TITLE_MAX = 40
+
+
+def _summary(notifications: list[Notification]) -> str:
+    """プッシュ通知に出る文。件数と、1 件目の価格・商品名・サイト名。"""
+    new = sum(1 for n in notifications if n.kind == "new")
+    drop = len(notifications) - new
+    counts = "・".join(s for s in (f"新着{new}件" if new else "", f"値下げ{drop}件" if drop else "") if s)
+
+    first = notifications[0]
+    listing = first.listing
+    if first.kind == "price_drop":
+        price = f"¥{first.old_price:,}→¥{listing.price_yen:,}"
+    else:
+        price = f"¥{listing.price_yen:,}"
+    title = listing.title if len(listing.title) <= _TITLE_MAX else listing.title[:_TITLE_MAX] + "…"
+    rest = f"ほか{len(notifications) - 1}件" if len(notifications) > 1 else ""
+    return f"{counts}｜{price} {title}（{site_name(listing.site)}）{rest}"
 
 
 def _bubble(n: Notification) -> dict:
