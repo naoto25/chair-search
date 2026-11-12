@@ -1,0 +1,402 @@
+{
+ "meta": {
+  "nextPageToken": "v1:1",
+  "previousPageToken": "",
+  "numFound": "151",
+  "properties": []
+ },
+ "items": [
+  {
+   "id": "2JYarP978UPTJtogyfJWy2",
+   "sellerId": "0",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "【展示未使用品】OKAMURA Sylphy オカムラ シルフィー エクストラハイバック 可動ヘッドレスト付 可動肘 バックカーブアジャスト機構付き クッション オールブラック",
+   "price": "95000",
+   "created": "1792830023",
+   "updated": "1794126313",
+   "thumbnails": [
+    "https://assets.mercari-shops-static.com/-/small/plain/2JYQTty5rH5yqG2cgW68SV.jpg@webp"
+   ],
+   "itemType": "ITEM_TYPE_BEYOND",
+   "itemConditionId": "1",
+   "shippingPayerId": "0",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "0",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://assets.mercari-shops-static.com/-/large/plain/2JYQTty5rH5yqG2cgW68SV.jpg@webp"
+    }
+   ],
+   "auction": null,
+   "shop": {
+    "id": "2JY6EjaXGKNqEc4jYo52DJ"
+   },
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m72207062492",
+   "sellerId": "418474199",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "オカムラ　シルフィー用　可動ヘッドレスト　ミディアムグレー",
+   "price": "24900",
+   "created": "1794037805",
+   "updated": "1794374129",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m72207062492_1.jpg?1794037805"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "2",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "14",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m72207062492_1.jpg?1794037805"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m51240075815",
+   "sellerId": "533297660",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "【オカムラ】シルフィー用 ハンガー　ブラックフレーム＋ボルトとナット2セット同梱",
+   "price": "12800",
+   "created": "1794411635",
+   "updated": "1794411635",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m51240075815_1.jpg?1794411635"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "3",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "17",
+   "categoryId": "4345",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m51240075815_1.jpg?1794411635"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m18411579596",
+   "sellerId": "841313889",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "《美品》オカムラ　シルフィー　ヘッドレスト付",
+   "price": "75000",
+   "created": "1791710825",
+   "updated": "1794303050",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m18411579596_1.jpg?1791710825"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "3",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m18411579596_1.jpg?1791710825"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m24720509407",
+   "sellerId": "533856726",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "オカムラ Sylphy(シルフィー) C68AKG オフィスチェア",
+   "price": "68600",
+   "created": "1793685729",
+   "updated": "1794142822",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m24720509407_1.jpg?1794102321"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "3",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m24720509407_1.jpg?1794102321"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m26476732034",
+   "sellerId": "926248383",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "【中古 訳あり】オカムラ シルフィー ハイバック 可動肘 ジャケットハンガー",
+   "price": "15880",
+   "created": "1793834806",
+   "updated": "1794265667",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m26476732034_1.jpg?1793834806"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "5",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m26476732034_1.jpg?1793834806"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m75913181325",
+   "sellerId": "278801527",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "【26年4月購入】オカムラ シルフィー| C685ZR-FMR5",
+   "price": "69800",
+   "created": "1792307582",
+   "updated": "1794318518",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m75913181325_1.jpg?1794318327"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "2",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m75913181325_1.jpg?1794318327"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m64063119572",
+   "sellerId": "962879982",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "オカムラ オフィスチェア シルフィー エクストラハイバック",
+   "price": "62000",
+   "created": "1794277842",
+   "updated": "1794293512",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m64063119572_1.jpg?1794277842"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "3",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m64063119572_1.jpg?1794277842"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m26591985494",
+   "sellerId": "720445579",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "使用頻度少　2025購入　オカムラ シルフィー ハイバック ブラック",
+   "price": "86800",
+   "created": "1790496583",
+   "updated": "1794220944",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m26591985494_1.jpg?1790988454"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "2",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m26591985494_1.jpg?1790988454"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  },
+  {
+   "id": "m97106703655",
+   "sellerId": "981818720",
+   "buyerId": "",
+   "status": "ITEM_STATUS_ON_SALE",
+   "name": "オカムラ シルフィー ハイバック 可動肘 ベージュ ブラックフレーム",
+   "price": "37600",
+   "created": "1793593854",
+   "updated": "1794398652",
+   "thumbnails": [
+    "https://static.mercdn.net/thumb/item/webp/m97106703655_1.jpg?1793593854"
+   ],
+   "itemType": "ITEM_TYPE_MERCARI",
+   "itemConditionId": "4",
+   "shippingPayerId": "2",
+   "itemSizes": [],
+   "itemBrand": {
+    "id": "16981",
+    "name": "OKAMURA",
+    "subName": "OKAMURA"
+   },
+   "itemPromotions": [],
+   "shopName": "",
+   "itemSize": null,
+   "shippingMethodId": "16",
+   "categoryId": "4340",
+   "isNoPrice": false,
+   "title": "",
+   "isLiked": false,
+   "photos": [
+    {
+     "uri": "https://static.mercdn.net/item/detail/webp/photos/m97106703655_1.jpg?1793593854"
+    }
+   ],
+   "auction": null,
+   "shop": null,
+   "attributes": [],
+   "preOrderState": "PRE_ORDER_STATE_UNSPECIFIED"
+  }
+ ]
+}

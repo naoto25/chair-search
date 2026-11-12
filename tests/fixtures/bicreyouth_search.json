@@ -1,0 +1,63 @@
+{
+ "data": [
+  {
+   "system_code": "000000019388",
+   "product_name": "【中古】オカムラ 肘無オフィスチェア シルフィー 2024年製  C637BW FXW1 グレー 事務椅子 パソコンチェア 布張り 中古オフィス家具 KK22591 EG22591",
+   "product_group_name": "肘無 オフィスチェア",
+   "sell_price": 44000,
+   "discount_rate": "0.00",
+   "discount_period": "000000000000|999999999999",
+   "quantity": 12,
+   "display": "Y",
+   "max_image_url": "https://makeshop-multi-images.akamaized.net/bicstore/itemimages/000000019388_6GNRLCP.jpg"
+  },
+  {
+   "system_code": "000000017134",
+   "product_name": "【中古】オカムラ 肘付きオフィスチェア シルフィー C681XW FMR8 2022年製 オレンジ ローバック メッシュ 中古オフィス家具 KK21123",
+   "product_group_name": "肘付 オフィスチェア",
+   "sell_price": 36300,
+   "discount_rate": "0.00",
+   "discount_period": "000000000000|999999999999",
+   "quantity": 0,
+   "display": "Y",
+   "max_image_url": "https://makeshop-multi-images.akamaized.net/bicstore/itemimages/000000017134_eXxgvAL.jpg"
+  },
+  {
+   "system_code": "000000017135",
+   "product_name": "【中古】オカムラ  肘付きオフィスチェア シルフィー C681XW FMP5 2021年製  ライトグリーン ローバック メッシュ 中古オフィス家具 EG21124",
+   "product_group_name": "肘付 オフィスチェア",
+   "sell_price": 36300,
+   "discount_rate": "10.00",
+   "discount_period": "000000000000|999999999999",
+   "quantity": 0,
+   "display": "Y",
+   "max_image_url": "https://makeshop-multi-images.akamaized.net/bicstore/itemimages/000000017135_5AJUJZc.jpg"
+  },
+  {
+   "system_code": "000000016904",
+   "product_name": "【中古/良品】オカムラ シルフィー 肘無し オフィスチェア C631XR FMP1 ブラック メッシュ 22年製 ローバック  中古オフィス家具 YH20922",
+   "product_group_name": null,
+   "sell_price": 29700,
+   "discount_rate": "0.00",
+   "discount_period": "000000000000|999999999999",
+   "quantity": 0,
+   "display": "Y",
+   "max_image_url": "https://makeshop-multi-images.akamaized.net/bicstore/itemimages/000000016904_XBcYAww.jpg"
+  },
+  {
+   "system_code": "000000013366",
+   "product_name": "【SALE】オカムラ シルフィー C647XR-FSF3  オフィスチェア ブルー 肘付き 布張り 高機能チェア 中古 KK17006-1 EG17006-1 配送サイズ250",
+   "product_group_name": "高機能チェア",
+   "sell_price": 26400,
+   "discount_rate": "55.00",
+   "discount_period": "000000000000|999999999999",
+   "quantity": 0,
+   "display": "Y",
+   "max_image_url": "https://makeshop-multi-images.akamaized.net/bicstore/itemimages/000000013366_Vl8trf6.jpg"
+  }
+ ],
+ "current_page": 1,
+ "last_page": 1,
+ "per_page": 50,
+ "total": 5
+}
