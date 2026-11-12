@@ -13,6 +13,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from chair_watch import notify_line
+from chair_watch.detail_cache import DetailCache
 from chair_watch.diff import SiteFetch, compute
 from chair_watch.filters import is_target
 from chair_watch.models import Listing
@@ -20,6 +21,7 @@ from chair_watch.sources import http_sources, mercari
 
 log = logging.getLogger("chair_watch")
 STATE_PATH = Path("state.json")
+DETAIL_CACHE_PATH = Path("detail_cache.json")
 
 
 def load_state(path: Path) -> dict:
@@ -43,11 +45,11 @@ def fetch_site(site: str, fetch: Callable[[], list[Listing]]) -> SiteFetch | Non
     return SiteFetch(raw_count=len(raw), listings=targets)
 
 
-def fetch_all() -> dict[str, SiteFetch | None]:
+def fetch_all(cache: DetailCache) -> dict[str, SiteFetch | None]:
     fetches: dict[str, SiteFetch | None] = {}
     with http_sources.client() as client:
         for site, fetch in http_sources.SOURCES.items():
-            fetches[site] = fetch_site(site, lambda fetch=fetch: fetch(client))
+            fetches[site] = fetch_site(site, lambda fetch=fetch: fetch(client, cache))
 
     from playwright.sync_api import sync_playwright
 
@@ -63,7 +65,10 @@ def fetch_all() -> dict[str, SiteFetch | None]:
 def main() -> int:
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     state = load_state(STATE_PATH)
-    result = compute(state, fetch_all())
+    cache = DetailCache.load(DETAIL_CACHE_PATH)
+    result = compute(state, fetch_all(cache))
+    # 詳細ページの内容は通知の成否に関係なく保存してよい（読み直しを減らすため）
+    cache.save(DETAIL_CACHE_PATH)
 
     messages = notify_line.build_messages(result.notifications)
     if result.failure_alerts:

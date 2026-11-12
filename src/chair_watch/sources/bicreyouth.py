@@ -5,6 +5,7 @@ from urllib.parse import quote
 
 import httpx
 
+from chair_watch.detail_cache import DetailCache
 from chair_watch.models import Listing
 
 SITE = "bicreyouth"
@@ -48,7 +49,7 @@ def _price(p: dict, now_str: str) -> int:
     return price
 
 
-def fetch(client: httpx.Client) -> list[Listing]:
+def fetch(client: httpx.Client, cache: DetailCache) -> list[Listing]:  # noqa: ARG001 詳細ページは読まない
     results: dict[str, Listing] = {}
     for keyword in KEYWORDS:
         response = client.get(search_url(keyword))
